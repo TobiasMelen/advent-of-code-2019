@@ -114,8 +114,11 @@ const secondStarResult = getSecondStar(input, 19690720);
 
 test("Star2 - Actual result", () => assertEquals(secondStarResult, 6472));
 
-//@ts-ignore top-level await
-await runTests();
+if(Deno.args.find(arg => arg === "-t" || arg === "--test")){
+    //@ts-ignore top-level await
+    await runTests();
+    Deno.exit();
+}
 
 const firstStarInput = replaceIndex1and2(input, 12, 2);
 

@@ -46,8 +46,11 @@ test("Star2 - Case3", () =>
 test("RangeCreator", () =>
   assertEquals(createInputRange(3, 7), [3, 4, 5, 6, 7]));
 
-//@ts-ignore top level await
-await runTests();
+if (Deno.args.find(arg => arg === "-t" || arg === "test")) {
+  //@ts-ignore top level await
+  await runTests();
+  Deno.exit();
+}
 
 const range = createInputRange(...input);
 

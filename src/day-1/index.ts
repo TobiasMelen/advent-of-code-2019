@@ -36,8 +36,11 @@ test(calcFuelWithFuelForFuelTest("Star2 - Case 1", 14, 2));
 test(calcFuelWithFuelForFuelTest("Star2 - Case 2", 1969, 966));
 test(calcFuelWithFuelForFuelTest("Star2 - Case 3", 100756, 50346));
 
-//@ts-ignore top level await
-await runTests();
+if (Deno.args.find(arg => arg === "-t" || "--test")) {
+  //@ts-ignore top level await
+  await runTests();
+  Deno.exit();
+}
 
 //Main program run from input.txt starts here.
 //@ts-ignore top level await
@@ -47,7 +50,4 @@ const input = await readFileLines(
 
 console.log("First star result: ", sum(input, calcFuel));
 
-console.log(
-  "Second star result: ",
-  sum(input, calcFuelWithFuelForFuel)
-);
+console.log("Second star result: ", sum(input, calcFuelWithFuelForFuel));
